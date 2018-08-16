@@ -1,0 +1,11 @@
+name: RDW
+version: 1.13-1.0
+main: com.rhetorical.dualwield.Main
+author: Mr_Rhetorical
+commands:
+  dualwield:
+    usage: /<command>
+    description: Base command for Rhetorical's Dual Wield
+  dw:
+    usage: /<command>
+    description: Base command for Rhetorical's Dual Wield
