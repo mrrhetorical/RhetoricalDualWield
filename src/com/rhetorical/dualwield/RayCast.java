@@ -2,12 +2,13 @@ package com.rhetorical.dualwield;
 
 class RayCast {
 
-    private Point origin, direction;
-    private float distance;
+    private Point origin;
+    private float distance, pitch, yaw;
 
-    RayCast(Point origin, Point direction, float distance) {
+    RayCast(Point origin, float pitch, float yaw, float distance) {
         this.origin = origin;
-        this.direction = direction;
+        this.pitch = pitch;
+        this.yaw = yaw;
         this.distance = distance;
     }
 
@@ -19,9 +20,16 @@ class RayCast {
         float timeSinceLastCheck = 1f;
 
         while(traveled <= distance) {
-            check.x += direction.getX() * timeSinceLastCheck;
-            check.y += direction.getY() * timeSinceLastCheck;
-            check.z += direction.getZ() * timeSinceLastCheck;
+
+            float x, y, z;
+
+            y = distance * (float) Math.cos(pitch);
+            z = distance * (float) Math.cos(yaw);
+            x = ((distance * (float) Math.sin(pitch)) + (distance * (float) Math.sin(yaw))) / 2f;
+
+            check.x += x * timeSinceLastCheck;
+            check.y += y * timeSinceLastCheck;
+            check.z += z * timeSinceLastCheck;
 
             traveled += Point.distance(lastChecked, check);
 

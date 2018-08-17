@@ -104,6 +104,10 @@ class HitboxBounds {
         return point.getZ() >= parent.getLocation().getZ() + A.getZ() && point.getZ() <= parent.getLocation().getZ() + B.getZ();
     }
 
+    Entity getParent() {
+        return this.parent;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

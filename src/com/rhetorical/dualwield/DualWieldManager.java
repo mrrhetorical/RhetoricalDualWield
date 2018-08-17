@@ -48,36 +48,13 @@ class DualWieldManager implements Listener {
     }
 
     private boolean performSwing(Player from, int swingDistance) {
-        BlockIterator iterator = new BlockIterator(from.getEyeLocation(), -0.25, swingDistance);
-        while (iterator.hasNext()) {
-
-            Location loc = iterator.next().getLocation();
-            List<Entity> nearbyEntities = (List<Entity>) loc.getWorld().getNearbyEntities(loc, 1, 1, 1);
-            List<LivingEntity> nearby = new ArrayList<LivingEntity>();
-
-            for(Entity entity : nearbyEntities) {
-                if (entity instanceof LivingEntity) {
-                    nearby.add((LivingEntity) entity);
-                }
-            }
-
-
-            if (nearby.isEmpty())
-                continue;
-
-            LivingEntity hit = nearby.get(0);
-
-
-            ItemStack heldItem = from.getInventory().getItemInOffHand();
-
-            double damage = ItemStats.getAttackDamage(heldItem.getType());
-
-//            damage = getDamage(from, hit, damage);
-
-            Bukkit.getServer().getPluginManager().callEvent(new EntityDamageByEntityEvent(from, hit, EntityDamageEvent.DamageCause.CUSTOM, damage));
-            return true;
+        RayCast rayCast = new RayCast(new Point((float) from.getLocation().getX(), (float) from.getLocation().getY(), (float) from.getLocation().getZ()), from.getEyeLocation().getPitch(), from.getEyeLocation().getYaw(), 3f);
+        Object raycastHit = rayCast.getHit();
+        ItemStack heldItem = from.getInventory().getItemInOffHand();
+        double damage = ItemStats.getAttackDamage(heldItem.getType());
+        if (raycastHit != null) {
+            EntityDamageByEntityEvent event = new EntityDamageByEntityEvent((Entity) from, (Entity) ((HitboxBounds) raycastHit).getParent(), EntityDamageEvent.DamageCause.CUSTOM, damage);
         }
-
         return false;
     }
 
