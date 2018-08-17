@@ -67,15 +67,6 @@ class DualWieldManager implements Listener {
 
             LivingEntity hit = nearby.get(0);
 
-            if (nearby.size() > 1) {
-                for(LivingEntity le : nearby) {
-                    if (le instanceof Player) {
-                        hit = le;
-                        break;
-                    }
-                }
-            }
-
 
             ItemStack heldItem = from.getInventory().getItemInOffHand();
 

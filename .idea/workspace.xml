@@ -7,17 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="497dc872-a076-4079-b7a2-672cf98cb8e4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/RhetoricalsDualWield_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/rhetorical/dualwield/ItemStats.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/caleb.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/rhetorical/dualwield/HitboxBounds.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/rhetorical/dualwield/HitboxManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/rhetorical/dualwield/RayCast.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_13_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_12_SNAPSHOT.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/rhetorical/dualwield/DualWieldManager.class" afterPath="$PROJECT_DIR$/target/classes/com/rhetorical/dualwield/DualWieldManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_13_R0_1_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_13_R0_1_SNAPSHOT.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RhetoricalsDualWield.iml" afterPath="$PROJECT_DIR$/RhetoricalsDualWield.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/rhetorical/dualwield/DualWieldManager.java" afterPath="$PROJECT_DIR$/src/com/rhetorical/dualwield/DualWieldManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/rhetorical/dualwield/Main.java" afterPath="$PROJECT_DIR$/src/com/rhetorical/dualwield/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/config.yml" afterPath="$PROJECT_DIR$/src/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugin.yml" afterPath="$PROJECT_DIR$/src/plugin.yml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -33,28 +33,51 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/Main.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="DualWieldManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/DualWieldManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="45">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1979#1993#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DualWieldManager.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/DualWieldManager.java">
+      <file leaf-file-name="HitboxManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/HitboxManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="39" column="88" lean-forward="false" selection-start-line="39" selection-start-column="78" selection-end-line="39" selection-end-column="88" />
+            <state relative-caret-position="661">
+              <caret line="51" column="47" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding>
-                <element signature="e#740#741#0" expanded="true" />
-                <element signature="e#827#828#0" expanded="true" />
-                <element signature="e#1979#1993#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#979#1909#0" expanded="true" />
+                <element signature="e#1164#1178#0" expanded="true" />
+                <element signature="e#1908#1909#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RayCast.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/RayCast.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="36" lean-forward="false" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HitboxBounds.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/HitboxBounds.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="20" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+              <folding>
+                <element signature="method#toString#0;class#Point#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -63,8 +86,8 @@
       <file leaf-file-name="plugin.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/plugin.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+            <state relative-caret-position="135">
+              <caret line="9" column="5" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -73,7 +96,7 @@
       <file leaf-file-name="ItemStats.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/ItemStats.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="135">
               <caret line="64" column="18" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
               <folding>
                 <element signature="method#getAttackDamage#0;class#ItemStats#0" expanded="false" />
@@ -118,6 +141,9 @@
         <option value="$PROJECT_DIR$/src/com/rhetorical/dualwield/ItemStats.java" />
         <option value="$PROJECT_DIR$/src/plugin.yml" />
         <option value="$PROJECT_DIR$/src/com/rhetorical/dualwield/DualWieldManager.java" />
+        <option value="$PROJECT_DIR$/src/com/rhetorical/dualwield/HitboxBounds.java" />
+        <option value="$PROJECT_DIR$/src/com/rhetorical/dualwield/RayCast.java" />
+        <option value="$PROJECT_DIR$/src/com/rhetorical/dualwield/HitboxManager.java" />
       </list>
     </option>
   </component>
@@ -135,10 +161,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="186" />
-    <option name="y" value="108" />
-    <option name="width" value="1378" />
-    <option name="height" value="832" />
+    <option name="x" value="2" />
+    <option name="y" value="23" />
+    <option name="width" value="1438" />
+    <option name="height" value="812" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -158,28 +184,25 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RhetoricalsDualWield" />
+              <option name="myItemId" value="Rhetoricals-Dual-Wield" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RhetoricalsDualWield" />
+              <option name="myItemId" value="Rhetoricals-Dual-Wield" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RhetoricalsDualWield" />
+              <option name="myItemId" value="Rhetoricals-Dual-Wield" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RhetoricalsDualWield" />
+              <option name="myItemId" value="Rhetoricals-Dual-Wield" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -189,15 +212,23 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RhetoricalsDualWield" />
+              <option name="myItemId" value="Rhetoricals-Dual-Wield" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RhetoricalsDualWield" />
+              <option name="myItemId" value="Rhetoricals-Dual-Wield" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rhetorical" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -205,23 +236,76 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rhetoricals-Dual-Wield" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rhetoricals-Dual-Wield" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rhetorical" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dualwield" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HitboxBounds.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Minecraft Server/plugins" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2045977" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.HitboxBounds">
+    <configuration default="false" name="HitboxBounds" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.rhetorical.dualwield.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="com.rhetorical.dualwield.HitboxBounds" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="RhetoricalsDualWield" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -459,6 +543,7 @@
       <setting name="passParentEnv" value="true" />
       <setting name="launchBrowser" value="true" />
       <setting name="launchBrowserUrl" value="" />
+      <setting name="depsClasspath" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -583,6 +668,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -611,6 +702,14 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Application.HitboxBounds" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.HitboxBounds" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -623,45 +722,46 @@
       <option name="presentableId" value="Default" />
       <updated>1534460148038</updated>
       <workItem from="1534460151744" duration="14252000" />
+      <workItem from="1534524940312" duration="4386000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14252000" />
+    <option name="totallyTimeSpent" value="18638000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="186" y="108" width="1378" height="832" extended-state="0" />
+    <frame x="2" y="23" width="1438" height="812" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963988" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32839838" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3524229" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.337274" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -672,7 +772,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -681,111 +781,37 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/nms/wrappers/Version113.java">
+    <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/comphenix/protocol/ProtocolLib-API/4.3.0/ProtocolLib-API-4.3.0.jar!/com/comphenix/protocol/PacketType.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="760" column="114" lean-forward="false" selection-start-line="760" selection-start-column="0" selection-end-line="761" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/IdeaProjects/External Lib/spigot-1.13.0.jar!/net/minecraft/server/v1_13_R1/PacketPlayOutAnimation.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="20" column="11" lean-forward="false" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/IdeaProjects/External Lib/spigot-1.13.0.jar!/org/bukkit/entity/Player.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="325" column="37" lean-forward="false" selection-start-line="325" selection-start-column="37" selection-end-line="325" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/src.zip!/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="62" column="33" lean-forward="false" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/IdeaProjects/External Lib/spigot-1.13.0.jar!/net/minecraft/server/v1_13_R1/PlayerConnection.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="1372" column="35" lean-forward="true" selection-start-line="1372" selection-start-column="35" selection-end-line="1372" selection-end-column="35" />
+        <state relative-caret-position="405">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <element signature="e#71903#71904#0" expanded="true" />
-            <element signature="e#71962#71963#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/src.zip!/java/lang/Class.java">
+    <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/DualWieldManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="1697" column="19" lean-forward="false" selection-start-line="1697" selection-start-column="19" selection-end-line="1697" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/IdeaProjects/External Lib/spigot-1.13.0.jar!/org/bukkit/Material.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98804">
-          <caret line="5943" column="18" lean-forward="true" selection-start-line="5943" selection-start-column="18" selection-end-line="5943" selection-end-column="18" />
-          <caret line="5944" column="18" lean-forward="true" selection-start-line="5944" selection-start-column="18" selection-end-line="5944" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.13-R0.1-SNAPSHOT/spigot-api-1.13-R0.1-20180816.105112-134.jar!/org/bukkit/inventory/ItemStack.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="29" lean-forward="true" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11982#0" expanded="true" />
+            <element signature="e#1979#1993#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/Attributes.java">
+    <entry file="file://$PROJECT_DIR$/src/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.13-R0.1-SNAPSHOT/spigot-api-1.13-R0.1-20180816.105112-134.jar!/org/bukkit/util/BlockIterator.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="199" column="26" lean-forward="false" selection-start-line="199" selection-start-column="19" selection-end-line="199" selection-end-column="26" />
+        <state relative-caret-position="135">
+          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/ItemStats.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
+        <state relative-caret-position="135">
           <caret line="64" column="18" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
           <folding>
             <element signature="method#getAttackDamage#0;class#ItemStats#0" expanded="false" />
@@ -795,49 +821,109 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/nms/wrappers/Version113.java" />
+    <entry file="jar://$MAVEN_REPOSITORY$/com/comphenix/protocol/ProtocolLib-API/4.3.0/ProtocolLib-API-4.3.0.jar!/com/comphenix/protocol/PacketType.class" />
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/IdeaProjects/External Lib/spigot-1.13.0.jar!/net/minecraft/server/v1_13_R1/PacketPlayOutAnimation.class" />
+    <entry file="jar://$USER_HOME$/IdeaProjects/External Lib/spigot-1.13.0.jar!/org/bukkit/entity/Player.class" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/src.zip!/java/lang/Object.java" />
+    <entry file="jar://$USER_HOME$/IdeaProjects/External Lib/spigot-1.13.0.jar!/net/minecraft/server/v1_13_R1/PlayerConnection.class" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/src.zip!/java/lang/Class.java" />
+    <entry file="jar://$USER_HOME$/IdeaProjects/External Lib/spigot-1.13.0.jar!/org/bukkit/Material.class" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.13-R0.1-SNAPSHOT/spigot-api-1.13-R0.1-20180816.105112-134.jar!/org/bukkit/inventory/ItemStack.class" />
+    <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/Attributes.java" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.13-R0.1-SNAPSHOT/spigot-api-1.13-R0.1-20180816.105112-134.jar!/org/bukkit/util/BlockIterator.class" />
     <entry file="file://$PROJECT_DIR$/src/config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+        <state relative-caret-position="135">
+          <caret line="9" column="5" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.13-R0.1-SNAPSHOT/spigot-api-1.13-R0.1-20180816.105112-134.jar!/org/bukkit/event/entity/EntityDamageByEntityEvent.class" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/src.zip!/java/util/Vector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="129" column="11" lean-forward="false" selection-start-line="129" selection-start-column="11" selection-end-line="129" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/HitboxManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="661">
+          <caret line="51" column="47" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#979#1909#0" expanded="true" />
+            <element signature="e#1164#1178#0" expanded="true" />
+            <element signature="e#1908#1909#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state relative-caret-position="405">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.13-R0.1-SNAPSHOT/spigot-api-1.13-R0.1-20180816.105112-134.jar!/org/bukkit/event/entity/EntityDamageByEntityEvent.class">
+    <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/DualWieldManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="17" column="11" lean-forward="false" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
-          <folding />
+        <state relative-caret-position="45">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="e#1979#1993#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/DualWieldManager.java">
+    <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/ItemStats.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="39" column="88" lean-forward="false" selection-start-line="39" selection-start-column="78" selection-end-line="39" selection-end-column="88" />
+        <state relative-caret-position="135">
+          <caret line="64" column="18" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
           <folding>
-            <element signature="e#740#741#0" expanded="true" />
-            <element signature="e#827#828#0" expanded="true" />
-            <element signature="e#1979#1993#0" expanded="true" />
+            <element signature="method#getAttackDamage#0;class#ItemStats#0" expanded="false" />
+            <element signature="e#1731#1732#0" expanded="true" />
+            <element signature="e#1756#1757#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/HitboxBounds.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="20" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+          <folding>
+            <element signature="method#toString#0;class#Point#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/rhetorical/dualwield/RayCast.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="36" lean-forward="false" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -883,7 +969,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>1.8.0_60</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
