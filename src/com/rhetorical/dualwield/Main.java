@@ -2,8 +2,6 @@ package com.rhetorical.dualwield;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,6 +17,8 @@ public class Main extends JavaPlugin {
     static Class<?> NMSClass;
 
     static List<Material> allowedMaterials;
+
+    static boolean requirePermission;
 
     private DualWieldManager manager;
 
@@ -48,6 +48,8 @@ public class Main extends JavaPlugin {
             allowedMaterials.add(m);
         }
 
+        requirePermission = plugin.getConfig().getBoolean("require_permission");
+
         Bukkit.getServer().getConsoleSender().sendMessage("§aRhetorical's Dual Wield v§f" + plugin.getDescription().getVersion() + " §ais now enabled!");
 
     }
@@ -55,17 +57,6 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
 
-    }
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
-        if (!label.equalsIgnoreCase("dualWield") && !label.equalsIgnoreCase("dw"))
-            return false;
-
-
-
-        return true;
     }
 
     static Class<?> getNMSVersion(String name){

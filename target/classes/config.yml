@@ -1,3 +1,4 @@
+require_permission: false
 offhand_materials:
   - 'DIAMOND_SWORD'
   - 'GOLDEN_SWORD'
