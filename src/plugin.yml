@@ -1,4 +1,4 @@
-name: RDW
+name: DuelWielding
 version: 1.13-1.0
 main: com.rhetorical.dualwield.Main
 api-version: 1.13
@@ -6,7 +6,7 @@ author: Mr_Rhetorical
 commands:
   dualwield:
     usage: /<command>
-    description: Base command for Rhetorical's Dual Wield
+    description: Base command for DuelWield
   dw:
     usage: /<command>
     description: Base command for Rhetorical's Dual Wield

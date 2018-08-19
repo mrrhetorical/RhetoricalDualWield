@@ -14,8 +14,6 @@ public class Main extends JavaPlugin {
 
     private static String versionNMS;
 
-    static Class<?> NMSClass;
-
     static List<Material> allowedMaterials;
 
     static boolean requirePermission;
@@ -24,7 +22,7 @@ public class Main extends JavaPlugin {
 
     private DualWieldManager manager;
 
-    private String prefix = "§f[§eRDW§f]§r ";
+    private String prefix = "§f[§eDW§f]§r ";
 
     @Override
     public void onEnable() {
@@ -76,7 +74,7 @@ public class Main extends JavaPlugin {
 
         requirePermission = plugin.getConfig().getBoolean("require_permission");
 
-        Bukkit.getServer().getConsoleSender().sendMessage(prefix + "§aRhetorical's Dual Wield v§f" + plugin.getDescription().getVersion() + " §ais now enabled!");
+        Bukkit.getServer().getConsoleSender().sendMessage(prefix + "§aDuelWielding v§f" + plugin.getDescription().getVersion() + " §ais now enabled!");
 
     }
 
