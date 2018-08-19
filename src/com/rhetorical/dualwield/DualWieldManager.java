@@ -3,25 +3,30 @@ package com.rhetorical.dualwield;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.util.BlockIterator;
+import org.bukkit.util.Vector;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 class DualWieldManager implements Listener {
 
@@ -40,14 +45,84 @@ class DualWieldManager implements Listener {
         performSwing(e.getPlayer());
     }
 
-    private double getDamage(LivingEntity player, LivingEntity victim, double baseDamage) {
+    private double getDamage(ItemStack stack, LivingEntity victim, double baseDamage) {
+
+        /* Enchantment management */
+
+        Map<Enchantment, Integer> enchantments = stack.getEnchantments();
+
+        if (enchantments.containsKey(Enchantment.DAMAGE_ARTHROPODS)) {
+            if (victim instanceof Spider || victim instanceof Silverfish || victim instanceof Endermite) {
+                baseDamage += (2.5 * enchantments.get(Enchantment.DAMAGE_ARTHROPODS));
+            }
+        }
+
+        if (enchantments.containsKey(Enchantment.FIRE_ASPECT)) {
+            victim.setFireTicks(80 * enchantments.get(Enchantment.FIRE_ASPECT));
+        }
+
+        if (Main.postWaterUpdate) {
+            if (enchantments.containsKey(Enchantment.IMPALING)) {
+                if (victim instanceof Dolphin || victim instanceof ElderGuardian || victim instanceof Fish || victim instanceof Guardian || victim instanceof Squid || victim instanceof Turtle) {
+                    baseDamage += (2.5 * enchantments.get(Enchantment.IMPALING));
+                }
+            }
+        }
+
+        if (enchantments.containsKey(Enchantment.DAMAGE_ALL)) {
+            baseDamage += 1 + (0.5 * enchantments.get(Enchantment.DAMAGE_ALL));
+        }
+
+        if (enchantments.containsKey(Enchantment.DAMAGE_UNDEAD)) {
+            if (victim instanceof Skeleton || victim instanceof Zombie || victim instanceof Wither || victim instanceof SkeletonHorse) {
+                baseDamage += (2.5 * enchantments.get(Enchantment.DAMAGE_UNDEAD));
+            }
+
+
+            if (Main.postWaterUpdate) {
+                if (victim instanceof Phantom) {
+                    baseDamage += (2.5 * enchantments.get(Enchantment.DAMAGE_UNDEAD));
+                }
+            }
+
+        }
+
+        if (enchantments.containsKey(Enchantment.DURABILITY)) {
+            double rand = Math.random() * 100;
+
+            if ((100 / enchantments.get(Enchantment.DURABILITY) + 1) > rand) {
+                stack.setDurability((short) (stack.getDurability() + (short) 1));
+            }
+        } else {
+            stack.setDurability((short) (stack.getDurability() + (short) 1));
+        }
+
+
+        /* End enchantment management */
+
         if (!(victim instanceof Player)) {
             return baseDamage;
         }
 
+
 //        damage = damage * ( 1 - min( 20, max( defensePoints / 5, defensePoints - damage / ( toughness / 4 + 2 ) ) ) / 25 )
 
-        return baseDamage;
+        Player p = (Player) victim;
+
+        if (getArmorPoints(p) == 0) {
+            return baseDamage;
+        }
+
+        return baseDamage * (1 - Math.min(20, Math.max(getArmorPoints(p) / 5, getArmorPoints(p) - baseDamage / (getArmorToughness(p) / 4 + 2))) / 25);
+    }
+
+    private int getArmorPoints(Player p) {
+
+        return (int) p.getAttribute(Attribute.GENERIC_ARMOR).getValue();
+    }
+
+    private int getArmorToughness(Player p) {
+        return (int) p.getAttribute(Attribute.GENERIC_ARMOR_TOUGHNESS).getValue();
     }
 
     private boolean performSwing(Player from) {
@@ -61,33 +136,12 @@ class DualWieldManager implements Listener {
 
         playAnimation(from);
 
-//        List<Block> blocks = from.getLineOfSight(null, ItemStats.getSwingDistance(heldItem.getType()));
-//
-//        if (blocks.isEmpty())
-//            return false;
-//
-//        for (Block b : blocks) {
-//            List<Entity> nearby = (List<Entity>) b.getWorld().getNearbyEntities(b.getLocation(), 1.5d, 2.5d, 1.5d);
-//
-//            if (nearby.isEmpty())
-//                continue;
-//
-//            for(Entity e : nearby) {
-//                if (!(e instanceof LivingEntity))
-//                    continue;
-//
-//                EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(from, e, EntityDamageEvent.DamageCause.ENTITY_ATTACK, ItemStats.getAttackDamage(heldItem.getType()));
-//                Bukkit.getServer().getPluginManager().callEvent(event);
-//                return true;
-//            }
-//        }
-
-        Entity e = getTargetEntity(from);
+        Entity e = getTargetEntity(from, ItemStats.getSwingDistance(heldItem.getType()));
 
         if (e != null) {
-            EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(from, e, EntityDamageEvent.DamageCause.ENTITY_ATTACK, ItemStats.getAttackDamage(heldItem.getType()));
-                Bukkit.getServer().getPluginManager().callEvent(event);
-                return true;
+            EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(from, e, EntityDamageEvent.DamageCause.CUSTOM, ItemStats.getAttackDamage(heldItem.getType()));
+            Bukkit.getServer().getPluginManager().callEvent(event);
+            return true;
         }
 
         return false;
@@ -95,20 +149,86 @@ class DualWieldManager implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void playerHitEvent(EntityDamageByEntityEvent e) {
-        if (e.getDamager() instanceof Player && e.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
-            ((LivingEntity) e.getEntity()).damage(e.getDamage());
+        if (e.getDamager() instanceof Player && e.getCause() == EntityDamageEvent.DamageCause.CUSTOM) {
+            if (!(e.getEntity() instanceof LivingEntity))
+                return;
+
+            Player p = (Player) e.getDamager();
+
+            ItemStack hit = p.getInventory().getItemInOffHand();
+
+            LivingEntity le = (LivingEntity) e.getEntity();
+            le.damage(getDamage(hit, le, e.getDamage()));
+            le.setVelocity(e.getDamager().getLocation().getDirection().setY(0.3d).multiply(1d));
+
+            /* Enchantment stuff */
+
+            if (!(e.getEntity() instanceof Player))
+                return;
+
+            Player victim = (Player) e.getEntity();
+
+            List<ItemStack> armor = new ArrayList<ItemStack>();
+
+            if (victim.getInventory().getBoots() != null) {
+                armor.add(victim.getInventory().getBoots());
+            }
+
+            if (victim.getInventory().getLeggings() != null) {
+                armor.add(victim.getInventory().getLeggings());
+            }
+
+            if (victim.getInventory().getChestplate() != null) {
+                armor.add(victim.getInventory().getChestplate());
+            }
+
+            if (victim.getInventory().getHelmet() != null) {
+                armor.add(victim.getInventory().getHelmet());
+            }
+
+            double thornsDamage = 0d;
+
+            for(ItemStack a : armor) {
+                Map<Enchantment, Integer> enchantments = a.getEnchantments();
+
+                if (enchantments.isEmpty())
+                    continue;
+
+
+                if (enchantments.containsKey(Enchantment.THORNS)) {
+                    int level = enchantments.get(Enchantment.THORNS);
+
+                    double rand = Math.random();
+
+                    if (level * .15 < rand) {
+                        thornsDamage +=  Math.floor((Math.random() * 3) + 1);
+                    }
+                }
+            }
+
+            if (thornsDamage != 0) {
+                p.damage(thornsDamage);
+                p.getWorld().playSound(victim.getLocation(), Sound.ENCHANT_THORNS_HIT, 1, 1);
+            }
+
         }
     }
 
-    private Entity getTargetEntity(Player player) {
-        Collection<Entity> entities = player.getNearbyEntities(30, 10, 30);
+    private LivingEntity getTargetEntity(Player player, int distance) {
+        Collection<Entity> entities = player.getNearbyEntities(distance, 10, 30);
         ArrayList<Location> locations = new ArrayList<Location>();
 
-        for (int i = 1; i <= 30; i++) {
+        for (int i = distance; i >= 1; i--) {
             locations.add(player.getTargetBlock(null, i).getLocation());
         }
 
-        for(Entity entity : entities) {
+        for(Entity e : entities) {
+
+            if (!(e instanceof LivingEntity))
+                continue;
+
+            LivingEntity entity = (LivingEntity) e;
+
             for(Location loc : locations) {
                 int locX = (int) loc.getX();
                 int locY = (int) loc.getY();

@@ -20,7 +20,11 @@ public class Main extends JavaPlugin {
 
     static boolean requirePermission;
 
+    static boolean postWaterUpdate = false;
+
     private DualWieldManager manager;
+
+    private String prefix = "§f[§eRDW§f]§r ";
 
     @Override
     public void onEnable() {
@@ -31,6 +35,28 @@ public class Main extends JavaPlugin {
 
         versionNMS = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         manager = new DualWieldManager();
+
+        if (Bukkit.getServer().getBukkitVersion().startsWith("1.13")) {
+            postWaterUpdate = true;
+        } else {
+            for (int i = 14; i < 100; i++) {
+                if (Bukkit.getServer().getBukkitVersion().startsWith("1." + i)) {
+                    postWaterUpdate = true;
+                    break;
+                }
+
+                if (Bukkit.getServer().getBukkitVersion().startsWith("2")) {
+                    postWaterUpdate = true;
+                    break;
+                }
+            }
+        }
+
+        if (postWaterUpdate) {
+            Bukkit.getConsoleSender().sendMessage(prefix + "Spigot version 1.13+ detected!");
+        } else {
+            Bukkit.getConsoleSender().sendMessage(prefix + "Spigot version < 1.12 detected!");
+        }
 
 
         List<String> materialNames = plugin.getConfig().getStringList("offhand_materials");
@@ -50,7 +76,7 @@ public class Main extends JavaPlugin {
 
         requirePermission = plugin.getConfig().getBoolean("require_permission");
 
-        Bukkit.getServer().getConsoleSender().sendMessage("§aRhetorical's Dual Wield v§f" + plugin.getDescription().getVersion() + " §ais now enabled!");
+        Bukkit.getServer().getConsoleSender().sendMessage(prefix + "§aRhetorical's Dual Wield v§f" + plugin.getDescription().getVersion() + " §ais now enabled!");
 
     }
 

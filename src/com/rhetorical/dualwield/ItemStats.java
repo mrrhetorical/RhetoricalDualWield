@@ -62,6 +62,6 @@ class ItemStats {
     }
 
     static int getSwingDistance(Material material) {
-        return 5;
+        return 3;
     }
 }
