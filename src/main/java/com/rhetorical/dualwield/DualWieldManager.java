@@ -97,9 +97,7 @@ class DualWieldManager implements Listener {
             return baseDamage;
         }
 
-
-//        damage = damage * ( 1 - min( 20, max( defensePoints / 5, defensePoints - damage / ( toughness / 4 + 2 ) ) ) / 25 )
-
+        
         Player p = (Player) victim;
 
         if (getArmorPoints(p) == 0) {
