@@ -1,6 +1,7 @@
 package com.rhetorical.dualwield;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,7 +23,7 @@ public class Main extends JavaPlugin {
 
     private DualWieldManager manager;
 
-    private String prefix = "§f[§eDW§f]§r ";
+    private String prefix = ChatColor.WHITE + "[" + ChatColor.YELLOW + "DW" + ChatColor.WHITE + "]" + ChatColor.RESET + " ";
 
     @Override
     public void onEnable() {
@@ -74,7 +75,7 @@ public class Main extends JavaPlugin {
 
         requirePermission = plugin.getConfig().getBoolean("require_permission");
 
-        Bukkit.getServer().getConsoleSender().sendMessage(prefix + "§aDuelWielding v§f" + plugin.getDescription().getVersion() + " §ais now enabled!");
+        Bukkit.getServer().getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "DuelWielding v" + ChatColor.WHITE + plugin.getDescription().getVersion() + ChatColor.GREEN + " is now enabled!");
 
     }
 
@@ -87,7 +88,7 @@ public class Main extends JavaPlugin {
         try {
             return Class.forName("net.minecraft.server." + versionNMS + "." + name);
         } catch(Exception e) {
-            Bukkit.getConsoleSender().sendMessage("§cCould not get class for name! Is there a typo?");
+            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Could not get class for name! Is there a typo?");
             e.printStackTrace();
             return null;
         }
@@ -97,7 +98,7 @@ public class Main extends JavaPlugin {
         try {
             return Class.forName("org.bukkit.craftbukkit." + versionNMS + ".entity.CraftPlayer");
         } catch(Exception e) {
-            Bukkit.getConsoleSender().sendMessage("§cCould not get CraftPlayer class! Is there a typo?");
+            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Could not get CraftPlayer class! Is there a typo?");
             e.printStackTrace();
             return null;
         }
