@@ -16,6 +16,7 @@ public class Main extends JavaPlugin {
     private static String versionNMS;
 
     static List<Material> allowedMaterials;
+    static List<Material> disallowedMaterials; //Materials that will prevent the offhand from swinging if they are present.
 
     static boolean requirePermission;
 
@@ -59,7 +60,7 @@ public class Main extends JavaPlugin {
 
 
         List<String> materialNames = plugin.getConfig().getStringList("offhand_materials");
-        allowedMaterials = new ArrayList<Material>();
+        allowedMaterials = new ArrayList<>();
 
         for(String mat : materialNames) {
             Material m;
@@ -73,6 +74,20 @@ public class Main extends JavaPlugin {
             allowedMaterials.add(m);
         }
 
+        List<String> disallowedMaterialNames = plugin.getConfig().getStringList("disallowed_materials");
+        disallowedMaterials = new ArrayList<>();
+
+        for (String mat : disallowedMaterialNames) {
+        	Material m;
+        	try {
+        		m = Material.valueOf(mat);
+			} catch(Exception ignored) {
+        		continue;
+			}
+
+        	disallowedMaterials.add(m);
+		}
+
         requirePermission = plugin.getConfig().getBoolean("require_permission");
 
         Bukkit.getServer().getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "DuelWielding v" + ChatColor.WHITE + plugin.getDescription().getVersion() + ChatColor.GREEN + " is now enabled!");
@@ -81,7 +96,10 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+    	allowedMaterials = new ArrayList<>();
+    	disallowedMaterials = new ArrayList<>();
 
+    	System.gc();
     }
 
     static Class<?> getNMSVersion(String name){

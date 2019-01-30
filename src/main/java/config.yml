@@ -12,3 +12,7 @@ offhand_materials:
   - 'IRON_AXE'
   - 'STONE_AXE'
   - 'WOODEN_AXE'
+#A list of materials that will prevent the offhand from swinging when present in the main hand.
+disallowed_materials:
+  - 'COOKED_PORKCHOP'
+  - 'COOKED_BEEF'

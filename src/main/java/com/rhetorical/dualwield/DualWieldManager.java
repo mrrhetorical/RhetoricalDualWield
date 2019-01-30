@@ -2,6 +2,7 @@ package com.rhetorical.dualwield;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
@@ -35,7 +36,9 @@ class DualWieldManager implements Listener {
         if (!Main.allowedMaterials.contains(e.getPlayer().getInventory().getItemInOffHand().getType()))
             return;
 
-        performSwing(e.getPlayer());
+        if (!Main.disallowedMaterials.contains(e.getPlayer().getInventory().getItemInMainHand().getType())) {
+			performSwing(e.getPlayer());
+		}
     }
 
     private double getDamage(ItemStack stack, LivingEntity victim, double baseDamage) {
@@ -149,7 +152,9 @@ class DualWieldManager implements Listener {
             ItemStack hit = p.getInventory().getItemInOffHand();
 
             LivingEntity le = (LivingEntity) e.getEntity();
-            le.damage(getDamage(hit, le, e.getDamage()));
+            double damage = getDamage(hit, le, e.getDamage());
+            le.damage(damage, e.getDamager());
+
             le.setVelocity(e.getDamager().getLocation().getDirection().setY(0.3d).multiply(1d));
 
             /* Enchantment stuff */
@@ -177,6 +182,13 @@ class DualWieldManager implements Listener {
                 armor.add(victim.getInventory().getHelmet());
             }
 
+            e.setCancelled(true);
+
+//            EntityDamageByEntityEvent entityDamageByEntityEvent = new EntityDamageByEntityEvent(e.getDamager(), victim,
+//					EntityDamageEvent.DamageCause.ENTITY_ATTACK, damage);
+//
+//            Bukkit.getServer().getPluginManager().callEvent(entityDamageByEntityEvent);
+
             double thornsDamage = 0d;
 
             for(ItemStack a : armor) {
@@ -198,6 +210,8 @@ class DualWieldManager implements Listener {
             }
 
             if (thornsDamage != 0) {
+//            	EntityDamageByEntityEvent thornsEvent = new EntityDamageByEntityEvent(victim, e.getDamager(), EntityDamageEvent.DamageCause.THORNS, thornsDamage);
+//            	Bukkit.getServer().getPluginManager().callEvent(thornsEvent);
                 p.damage(thornsDamage);
                 p.getWorld().playSound(victim.getLocation(), Sound.ENCHANT_THORNS_HIT, 1, 1);
             }
