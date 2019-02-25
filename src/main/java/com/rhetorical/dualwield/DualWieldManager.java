@@ -24,8 +24,30 @@ import java.util.Map;
 
 class DualWieldManager implements Listener {
 
-    DualWieldManager() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, Main.plugin);
+    private static DualWieldManager instance;
+
+    /** Instantiate the instance and register events */
+    private DualWieldManager() {
+        instance = this;
+        Bukkit.getServer().getPluginManager().registerEvents(instance, Main.plugin);
+    }
+
+    /** @return the instance of the DualWieldManager. */
+    static DualWieldManager getInstance() {
+        return instance;
+    }
+
+    /** Creates a new DualWieldManager if it does not exist. */
+    static void create() throws DualWieldManagerAlreadyExistsException {
+        if (instance != null)
+            new DualWieldManager();
+        else
+            throw new DualWieldManagerAlreadyExistsException("The DualWieldManager already exists, but a new was was attempted to be created!");
+    }
+
+    /** Destroys the singleton instance. */
+    static void destroy() {
+        instance = null;
     }
 
     @EventHandler
@@ -41,7 +63,10 @@ class DualWieldManager implements Listener {
 		}
     }
 
-    private double getDamage(ItemStack stack, LivingEntity victim, double baseDamage) {
+
+    /** Calculates the amount of damage that is done to the victim given the base damage and item stack in the hand.
+     * This takes into account both the victims armor as well as any enchantments on the weapon or on the armor. */
+    private double getDamage(ItemStack stack, Player attacker, LivingEntity victim, double baseDamage) {
 
         /* Enchantment management */
 
@@ -59,7 +84,7 @@ class DualWieldManager implements Listener {
 
         if (Main.postWaterUpdate) {
             if (enchantments.containsKey(Enchantment.IMPALING)) {
-                if (victim instanceof Dolphin || victim instanceof ElderGuardian || victim instanceof Fish || victim instanceof Guardian || victim instanceof Squid || victim instanceof Turtle) {
+                if (victim instanceof Dolphin || victim instanceof Fish || victim instanceof Guardian || victim instanceof Squid || victim instanceof Turtle) {
                     baseDamage += (2.5 * enchantments.get(Enchantment.IMPALING));
                 }
             }
@@ -93,6 +118,11 @@ class DualWieldManager implements Listener {
             stack.setDurability((short) (stack.getDurability() + (short) 1));
         }
 
+        if (stack.getDurability() <= 0) {
+            attacker.getInventory().remove(stack);
+            attacker.playSound(attacker.getEyeLocation(), Sound.ENTITY_ITEM_BREAK, 1f, 1f);
+        }
+
 
         /* End enchantment management */
 
@@ -107,18 +137,27 @@ class DualWieldManager implements Listener {
             return baseDamage;
         }
 
-        return baseDamage * (1 - Math.min(20, Math.max(getArmorPoints(p) / 5, getArmorPoints(p) - baseDamage / (getArmorToughness(p) / 4 + 2))) / 25);
+        return baseDamage * (1 - Math.min(20, Math.max((float) getArmorPoints(p) / 5, getArmorPoints(p) - baseDamage / (float) (getArmorToughness(p) / 4 + 2))) / 25);
     }
 
+
+    /** Gets the armor points for the given player. */
     private int getArmorPoints(Player p) {
 
         return (int) p.getAttribute(Attribute.GENERIC_ARMOR).getValue();
     }
 
+
+    /** Gets the armor toughness for the given player. */
     private int getArmorToughness(Player p) {
         return (int) p.getAttribute(Attribute.GENERIC_ARMOR_TOUGHNESS).getValue();
     }
 
+
+    /** Performs a swing for the player.
+     * @param from = The player who swung their offhand.
+     * @return if the player hit an entity.
+     * */
     private boolean performSwing(Player from) {
 
         ItemStack heldItem = from.getInventory().getItemInOffHand();
@@ -130,7 +169,7 @@ class DualWieldManager implements Listener {
 
         playAnimation(from);
 
-        Entity e = getTargetEntity(from, ItemStats.getSwingDistance(heldItem.getType()));
+        LivingEntity e = getTargetEntity(from, ItemStats.getSwingDistance(heldItem.getType()));
 
         if (e != null) {
             EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(from, e, EntityDamageEvent.DamageCause.CUSTOM, ItemStats.getAttackDamage(heldItem.getType()));
@@ -147,12 +186,15 @@ class DualWieldManager implements Listener {
             if (!(e.getEntity() instanceof LivingEntity))
                 return;
 
+            if (e.isCancelled())
+                return;
+
             Player p = (Player) e.getDamager();
 
             ItemStack hit = p.getInventory().getItemInOffHand();
 
             LivingEntity le = (LivingEntity) e.getEntity();
-            double damage = getDamage(hit, le, e.getDamage());
+            double damage = getDamage(hit, p, le, e.getDamage());
             le.damage(damage, e.getDamager());
 
             le.setVelocity(e.getDamager().getLocation().getDirection().setY(0.3d).multiply(1d));
@@ -184,11 +226,6 @@ class DualWieldManager implements Listener {
 
             e.setCancelled(true);
 
-//            EntityDamageByEntityEvent entityDamageByEntityEvent = new EntityDamageByEntityEvent(e.getDamager(), victim,
-//					EntityDamageEvent.DamageCause.ENTITY_ATTACK, damage);
-//
-//            Bukkit.getServer().getPluginManager().callEvent(entityDamageByEntityEvent);
-
             double thornsDamage = 0d;
 
             for(ItemStack a : armor) {
@@ -210,8 +247,6 @@ class DualWieldManager implements Listener {
             }
 
             if (thornsDamage != 0) {
-//            	EntityDamageByEntityEvent thornsEvent = new EntityDamageByEntityEvent(victim, e.getDamager(), EntityDamageEvent.DamageCause.THORNS, thornsDamage);
-//            	Bukkit.getServer().getPluginManager().callEvent(thornsEvent);
                 p.damage(thornsDamage);
                 p.getWorld().playSound(victim.getLocation(), Sound.ENCHANT_THORNS_HIT, 1, 1);
             }
@@ -219,9 +254,14 @@ class DualWieldManager implements Listener {
         }
     }
 
+    /** Gets a target entity within the player's line of sight.
+     * @param player = The player to check their line of sight.
+     * @param distance = The distance of how far out from the player to check.
+     * @return any LivingEntity that the player is looking at, or null if nothing.
+     * */
     private LivingEntity getTargetEntity(Player player, int distance) {
         Collection<Entity> entities = player.getNearbyEntities(distance, 10, 30);
-        ArrayList<Location> locations = new ArrayList<Location>();
+        ArrayList<Location> locations = new ArrayList<>();
 
         for (int i = distance; i >= 1; i--) {
             locations.add(player.getTargetBlock(null, i).getLocation());
@@ -253,6 +293,9 @@ class DualWieldManager implements Listener {
 
     /* NMS Stuff */
 
+    /** Sends the player an offhand swing animation.
+     * @param p = the player to send the animation to.
+     * */
     private void playAnimation(Player p) {
         try {
             Constructor<?> animationConstructor = Main.getNMSVersion("PacketPlayOutAnimation").getConstructor(Main.getNMSVersion("Entity"), int.class);
@@ -264,6 +307,10 @@ class DualWieldManager implements Listener {
         }
     }
 
+    /** Sends the player the given packet.
+     * @param player = The player to send the packet to.
+     * @param packet = The packet to send to the player.
+     * */
     private void sendPacket(Player player, Object packet) {
         try {
             Object handle = Main.getCraftPlayer().cast(player).getClass().getMethod("getHandle").invoke(player);

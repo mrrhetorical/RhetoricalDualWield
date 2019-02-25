@@ -22,8 +22,6 @@ public class Main extends JavaPlugin {
 
     static boolean postWaterUpdate = false;
 
-    private DualWieldManager manager;
-
     private String prefix = ChatColor.WHITE + "[" + ChatColor.YELLOW + "DW" + ChatColor.WHITE + "]" + ChatColor.RESET + " ";
 
     @Override
@@ -34,8 +32,13 @@ public class Main extends JavaPlugin {
         plugin.reloadConfig();
 
         versionNMS = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-        manager = new DualWieldManager();
 
+        try {
+            //Instantiate singleton.
+            DualWieldManager.create();
+        } catch(DualWieldManagerAlreadyExistsException e) {
+            e.printStackTrace();
+        }
         if (Bukkit.getServer().getBukkitVersion().startsWith("1.13")) {
             postWaterUpdate = true;
         } else {
@@ -60,33 +63,10 @@ public class Main extends JavaPlugin {
 
 
         List<String> materialNames = plugin.getConfig().getStringList("offhand_materials");
-        allowedMaterials = new ArrayList<>();
-
-        for(String mat : materialNames) {
-            Material m;
-            try {
-                m = Material.valueOf(mat);
-            } catch(Exception ignored) {
-                continue;
-            }
-
-
-            allowedMaterials.add(m);
-        }
+        allowedMaterials = getMaterials(materialNames);
 
         List<String> disallowedMaterialNames = plugin.getConfig().getStringList("disallowed_materials");
-        disallowedMaterials = new ArrayList<>();
-
-        for (String mat : disallowedMaterialNames) {
-        	Material m;
-        	try {
-        		m = Material.valueOf(mat);
-			} catch(Exception ignored) {
-        		continue;
-			}
-
-        	disallowedMaterials.add(m);
-		}
+        disallowedMaterials = getMaterials(disallowedMaterialNames);
 
         requirePermission = plugin.getConfig().getBoolean("require_permission");
 
@@ -99,9 +79,10 @@ public class Main extends JavaPlugin {
     	allowedMaterials = new ArrayList<>();
     	disallowedMaterials = new ArrayList<>();
 
-    	System.gc();
+    	DualWieldManager.destroy();
     }
 
+    /** @return the current NMS version. */
     static Class<?> getNMSVersion(String name){
         try {
             return Class.forName("net.minecraft.server." + versionNMS + "." + name);
@@ -112,6 +93,7 @@ public class Main extends JavaPlugin {
         }
     }
 
+    /** @return the CraftPlayer class for the current NMS version.*/
     static Class getCraftPlayer() {
         try {
             return Class.forName("org.bukkit.craftbukkit." + versionNMS + ".entity.CraftPlayer");
@@ -120,6 +102,27 @@ public class Main extends JavaPlugin {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /** Gets a list of materials from a given list of strings.
+     * @param names = The list of material names to be converted into materials.
+     * @return A list of converted materials.
+     * */
+    private static List<Material> getMaterials(List<String> names) {
+        List<Material> mats = new ArrayList<>();
+        for(String mat : names) {
+            Material m;
+            try {
+                m = Material.valueOf(mat);
+            } catch(Exception ignored) {
+                continue;
+            }
+
+
+            mats.add(m);
+        }
+
+        return mats;
     }
 
 }

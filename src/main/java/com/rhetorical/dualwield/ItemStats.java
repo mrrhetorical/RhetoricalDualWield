@@ -4,6 +4,7 @@ import org.bukkit.Material;
 
 class ItemStats {
 
+    /** @return the attack damage for the given item. */
     static double getAttackDamage(Material material) {
         switch(material) {
             case IRON_SWORD:
@@ -61,7 +62,9 @@ class ItemStats {
         }
     }
 
+    /** @return the swing distance (in blocks) that the given material can reach. */
     static int getSwingDistance(Material material) {
+        //Returns 3 by default, no need for changes yet.
         return 3;
     }
 }
