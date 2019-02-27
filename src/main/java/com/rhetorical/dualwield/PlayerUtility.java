@@ -150,7 +150,7 @@ class PlayerUtility {
 				float entY = (float) entity.getLocation().getY();
 				float entZ = (float) entity.getLocation().getZ();
 
-				if(((locX-2f < entX)&&(entX < locX+2f))&&((locY-3f < entY)&&(entY < locY+3f))&&((locZ-2f < entZ)&&(entZ < locZ+2f))) {
+				if(((locX-1.2f < entX)&&(entX < locX+1.2f))&&((locY-1.6f < entY)&&(entY < locY+1.6f))&&((locZ-1.2f < entZ)&&(entZ < locZ+1.2f))) {
 					return entity;
 				}
 			}
