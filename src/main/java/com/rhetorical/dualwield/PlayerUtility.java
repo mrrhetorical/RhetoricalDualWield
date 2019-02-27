@@ -142,15 +142,15 @@ class PlayerUtility {
 			LivingEntity entity = (LivingEntity) e;
 
 			for(Location loc : locations) {
-				int locX = (int) loc.getX();
-				int locY = (int) loc.getY();
-				int locZ = (int) loc.getZ();
+				float locX = (float) loc.getX();
+				float locY = (float) loc.getY();
+				float locZ = (float) loc.getZ();
 
-				int entX = (int) entity.getLocation().getX();
-				int entY = (int) entity.getLocation().getY();
-				int entZ = (int) entity.getLocation().getZ();
+				float entX = (float) entity.getLocation().getX();
+				float entY = (float) entity.getLocation().getY();
+				float entZ = (float) entity.getLocation().getZ();
 
-				if(((locX-2 < entX)&&(entX < locX+2))&&((locY-3 < entY)&&(entY < locY+3))&&((locZ-2 < entZ)&&(entZ < locZ+2))) {
+				if(((locX-2f < entX)&&(entX < locX+2f))&&((locY-3f < entY)&&(entY < locY+3f))&&((locZ-2f < entZ)&&(entZ < locZ+2f))) {
 					return entity;
 				}
 			}
