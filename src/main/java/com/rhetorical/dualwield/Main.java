@@ -82,7 +82,10 @@ public class Main extends JavaPlugin {
     	DualWieldManager.destroy();
     }
 
-    /** @return the current NMS version. */
+    /** Returns the appropriately versioned class for the given name.
+	 * @param name The name of the class.
+	 * @return The class with the given name for the NMS version.
+	 * */
     static Class<?> getNMSVersion(String name){
         try {
             return Class.forName("net.minecraft.server." + versionNMS + "." + name);
@@ -93,7 +96,9 @@ public class Main extends JavaPlugin {
         }
     }
 
-    /** @return the CraftPlayer class for the current NMS version.*/
+    /**
+	 * @return The CraftPlayer class for the current NMS version.
+	 * */
     static Class getCraftPlayer() {
         try {
             return Class.forName("org.bukkit.craftbukkit." + versionNMS + ".entity.CraftPlayer");
@@ -105,10 +110,10 @@ public class Main extends JavaPlugin {
     }
 
     /** Gets a list of materials from a given list of strings.
-     * @param names = The list of material names to be converted into materials.
+     * @param names The list of material names to be converted into materials.
      * @return A list of converted materials.
      * */
-    private static List<Material> getMaterials(List<String> names) {
+    private List<Material> getMaterials(List<String> names) {
         List<Material> mats = new ArrayList<>();
         for(String mat : names) {
             Material m;
