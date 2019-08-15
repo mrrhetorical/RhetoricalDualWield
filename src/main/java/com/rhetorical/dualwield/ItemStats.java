@@ -4,7 +4,28 @@ import org.bukkit.Material;
 
 class ItemStats {
 
-    /**
+    enum CombatItem {
+        WOODEN_SWORD(4d, 3), STONE_SWORD(5d, 3), GOLD_SWORD(4d, 3), IRON_SWORD(6d, 3), DIAMOND_SWORD(7d, 3);
+
+        private double damage;
+        int distance;
+
+        CombatItem (double dmg, int dis) {
+            damage = dmg;
+            distance = dis;
+        }
+
+        public double getDamage() {
+            return damage;
+        }
+
+        public int getDistance() {
+            return distance;
+        }
+    }
+
+    /** Hacky temporary solution. I plan to fix this up with NBT tags with reflection, but likely will take longer to handle. Upside of using reflection is that it'll work across versions.
+     * Downside to using reflection is it'll be slower, which for attacking you don't want. If I store the values in a map or in a final enum, it'll be a little more ram that's used, but I'll have to check on it's impact.
 	 * @param material The material to get the attack damage for.
 	 * @return The attack damage for the given item.
 	 * */
@@ -65,7 +86,7 @@ class ItemStats {
         }
     }
 
-    /**
+    /** I intend to use the unused 1.14 combat change where the swing distance for different items was changed.
 	 * @param material The material to get the swing distance for.
 	 * @return The swing distance (in blocks) that the given material can reach.
 	 * */

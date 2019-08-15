@@ -1,11 +1,14 @@
 package com.rhetorical.dualwield;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +22,7 @@ class PlayerUtility {
 	 * @param p The player to get the armor points for.
 	 * @return The amount of armor points the player has.
 	 * */
-	static int getArmorPoints(Player p) {
+	private static int getArmorPoints(Player p) {
 
 		return (int) p.getAttribute(Attribute.GENERIC_ARMOR).getValue();
 	}
@@ -31,7 +34,7 @@ class PlayerUtility {
 	 * @param p The player to get the armor toughness for.
 	 * @return The amount of armor toughness the player has.
 	 * */
-	static int getArmorToughness(Player p) {
+	private static int getArmorToughness(Player p) {
 		return (int) p.getAttribute(Attribute.GENERIC_ARMOR_TOUGHNESS).getValue();
 	}
 
@@ -87,19 +90,30 @@ class PlayerUtility {
 
 		}
 
+//		short durability = stack.getItemMeta();
+
+		ItemMeta meta = stack.getItemMeta();
+
+		short durability = (short) ((Damageable) meta).getDamage();
+
+
 		if (enchantments.containsKey(Enchantment.DURABILITY)) {
 			double rand = Math.random() * 100;
 
 			if ((100 / enchantments.get(Enchantment.DURABILITY) + 1) > rand) {
-				stack.setDurability((short) (stack.getDurability() + (short) 1));
+				durability = (short) (durability + (short) 1);
 			}
 		} else {
-			stack.setDurability((short) (stack.getDurability() + (short) 1));
+			durability = (short) (durability + (short) 1);
 		}
 
-		if (stack.getDurability() <= 0) {
-			attacker.getInventory().remove(stack);
+		((Damageable) meta).setDamage((int) durability);
+
+		if (durability >= stack.getType().getMaxDurability()) {
+			attacker.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
 			attacker.playSound(attacker.getEyeLocation(), Sound.ENTITY_ITEM_BREAK, 1f, 1f);
+		} else {
+			stack.setItemMeta(meta);
 		}
 
 
@@ -150,6 +164,7 @@ class PlayerUtility {
 				float entY = (float) entity.getLocation().getY();
 				float entZ = (float) entity.getLocation().getZ();
 
+				// x side to side, z is front to back, y is top to bottom (- and + represent the total length, width, or heigh when added together)
 				if(((locX-1.2f < entX)&&(entX < locX+1.2f))&&((locY-1.6f < entY)&&(entY < locY+1.6f))&&((locZ-1.2f < entZ)&&(entZ < locZ+1.2f))) {
 					return entity;
 				}

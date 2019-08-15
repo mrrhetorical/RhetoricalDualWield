@@ -13,7 +13,7 @@ class PacketHandler {
 	 * Sends the player an offhand swing animation.
 	 * @param p The player to send the animation to.
 	 * */
-	static void playAnimation(Player p) {
+	static void playOffhandSwingAnimation(Player p) {
 		try {
 			Constructor<?> animationConstructor = Main.getNMSVersion("PacketPlayOutAnimation").getConstructor(Main.getNMSVersion("Entity"), int.class);
 			Object packet = animationConstructor.newInstance(Main.getCraftPlayer().cast(p).getClass().getMethod("getHandle").invoke(p), 3);
@@ -29,7 +29,7 @@ class PacketHandler {
 	 * @param player The player to send the packet to.
 	 * @param packet The packet to send to the player.
 	 * */
-	static void sendPacket(Player player, Object packet) {
+	private static void sendPacket(Player player, Object packet) {
 		try {
 			Object handle = Main.getCraftPlayer().cast(player).getClass().getMethod("getHandle").invoke(player);
 			Object playerConnection = handle.getClass().getField("playerConnection").get(handle);

@@ -68,7 +68,7 @@ class DualWieldManager implements Listener {
                 return false;
         }
 
-        PacketHandler.playAnimation(from);
+        PacketHandler.playOffhandSwingAnimation(from);
 
         LivingEntity e = PlayerUtility.getTargetEntity(from, ItemStats.getSwingDistance(heldItem.getType()));
 
