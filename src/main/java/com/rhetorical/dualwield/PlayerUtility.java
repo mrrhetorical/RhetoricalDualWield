@@ -110,7 +110,8 @@ class PlayerUtility {
 		((Damageable) meta).setDamage((int) durability);
 
 		if (durability >= stack.getType().getMaxDurability()) {
-			attacker.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
+			attacker.getInventory().setItemInOffHand(new ItemStack(Material.AIR)); //todo: switch to null if error persists
+			//attacker.getInventory().setItemInOffHand(null);
 			attacker.playSound(attacker.getEyeLocation(), Sound.ENTITY_ITEM_BREAK, 1f, 1f);
 		} else {
 			stack.setItemMeta(meta);
