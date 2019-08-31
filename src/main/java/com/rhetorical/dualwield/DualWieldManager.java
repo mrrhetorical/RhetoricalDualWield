@@ -1,6 +1,8 @@
 package com.rhetorical.dualwield;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
@@ -13,6 +15,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BlockDataMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +95,22 @@ class DualWieldManager implements Listener {
 			return;
 
 		if (!Main.disallowedMaterials.contains(e.getPlayer().getInventory().getItemInMainHand().getType())) {
+			if (e.getAction() == Action.RIGHT_CLICK_BLOCK
+					&& e.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null
+					&& e.getPlayer().getInventory().getItemInMainHand().getItemMeta() instanceof BlockDataMeta)
+				return;
+
+			Material mainhand = e.getPlayer().getInventory().getItemInMainHand().getType();
+			if (e.getAction() == Action.RIGHT_CLICK_AIR
+					&& (mainhand == Material.POTION
+						|| mainhand == Material.LINGERING_POTION
+					|| mainhand == Material.SPLASH_POTION
+					|| mainhand == Material.SHIELD
+					|| mainhand == Material.BOW
+					|| mainhand == Material.CROSSBOW)) {
+				return;
+			}
+
 			performSwing(e.getPlayer());
 		}
 	}
@@ -110,10 +129,21 @@ class DualWieldManager implements Listener {
 			ItemStack hit = p.getInventory().getItemInOffHand();
 
 			LivingEntity le = (LivingEntity) e.getEntity();
+
+			if (le instanceof Player) {
+				Player damaged = (Player) le;
+				if (damaged.getGameMode() != GameMode.SURVIVAL && damaged.getGameMode() != GameMode.ADVENTURE) {
+					p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_ATTACK_NODAMAGE, 1.0f, 1.0f);
+					return;
+				}
+			}
+
 			double damage = PlayerUtility.getDamage(hit, p, le, e.getDamage());
 			le.damage(damage, e.getDamager());
 
-			le.setVelocity(e.getDamager().getLocation().getDirection().setY(0.3d).multiply(1d));
+			if (damage != 0d) {
+				le.setVelocity(e.getDamager().getLocation().getDirection().setY(0.3d).multiply(0.5d));
+			}
 
 			/* Enchantment stuff */
 
@@ -161,8 +191,10 @@ class DualWieldManager implements Listener {
 			}
 
 			if (thornsDamage != 0) {
-				p.damage(thornsDamage);
-				p.getWorld().playSound(victim.getLocation(), Sound.ENCHANT_THORNS_HIT, 1, 1);
+				if (p.getGameMode() == GameMode.SURVIVAL || p.getGameMode() == GameMode.ADVENTURE) {
+					p.damage(thornsDamage);
+					p.getWorld().playSound(victim.getLocation(), Sound.ENCHANT_THORNS_HIT, 1, 1);
+				}
 			}
 
 			e.setCancelled(true);
