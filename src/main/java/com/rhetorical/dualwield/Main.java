@@ -1,6 +1,5 @@
 package com.rhetorical.dualwield;
 
-import com.rhetorical.dualwield.hitbox.HitboxUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -22,6 +21,8 @@ public class Main extends JavaPlugin {
     static boolean requirePermission;
 
     static boolean postWaterUpdate = false;
+
+    static float accuracy = 0.05f;
 
     private String prefix = ChatColor.WHITE + "[" + ChatColor.YELLOW + "DW" + ChatColor.WHITE + "]" + ChatColor.RESET + " ";
 
@@ -62,9 +63,6 @@ public class Main extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage(prefix + "Spigot version < 1.12 detected!");
         }
 
-        HitboxUtility.getInstance();
-
-
         List<String> materialNames = plugin.getConfig().getStringList("offhand_materials");
         allowedMaterials = getMaterials(materialNames);
 
@@ -72,6 +70,8 @@ public class Main extends JavaPlugin {
         disallowedMaterials = getMaterials(disallowedMaterialNames);
 
         requirePermission = plugin.getConfig().getBoolean("require_permission");
+
+        accuracy = (float) plugin.getConfig().getDouble("accuracy");
 
         Bukkit.getServer().getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "DuelWielding v" + ChatColor.WHITE + plugin.getDescription().getVersion() + ChatColor.GREEN + " is now enabled!");
 

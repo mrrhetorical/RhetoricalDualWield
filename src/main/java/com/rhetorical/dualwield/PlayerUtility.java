@@ -1,8 +1,7 @@
 package com.rhetorical.dualwield;
 
-import com.rhetorical.dualwield.hitbox.HitboxUtility;
+import com.rhetorical.dualwield.raytracing.RayTrace;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
@@ -12,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -146,25 +144,22 @@ class PlayerUtility {
 	 * @return Any LivingEntity that the player is looking at, or null if nothing.
 	 * */
 	static LivingEntity getTargetEntity(Player player, int distance) {
+
 		Collection<Entity> entities = player.getNearbyEntities(distance, 10, 30);
-		ArrayList<Location> locations = new ArrayList<>();
 
-		for (int i = distance; i >= 1; i--) {
-			locations.add(player.getTargetBlock(null, i).getLocation());
-		}
+		RayTrace rayTrace = new RayTrace(player.getEyeLocation().toVector(), player.getEyeLocation().getDirection().normalize());
 
-		for(Entity e : entities) {
-
+		for (Entity e : entities) {
 			if (!(e instanceof LivingEntity))
 				continue;
 
 			LivingEntity entity = (LivingEntity) e;
 
-			for(Location loc : locations) {
-				if (HitboxUtility.withinBounds(entity, loc))
-					return entity;
+			if (rayTrace.intersects(entity.getBoundingBox(), distance, Main.accuracy)) {
+				return entity;
 			}
 		}
+
 		return null;
 	}
 }
