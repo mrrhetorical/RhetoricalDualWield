@@ -1,7 +1,7 @@
 #Should the plugin require players have permissions to swing the offhand items?
 require_permission: false
-#Accuracy: Lower numbers will result in more accurate striking of entities, but with larger player numbers, it may increase server lag.
-accuraccy: 0.05
+#Accuracy: Lower numbers will result in more accurate striking of entities, but with more than a few players, it may increase server lag. 0.5 is pretty comfortable.
+accuraccy: 0.5
 #A list of allowed materials to be swung in the offhand.
 offhand_materials:
   - 'DIAMOND_SWORD'
