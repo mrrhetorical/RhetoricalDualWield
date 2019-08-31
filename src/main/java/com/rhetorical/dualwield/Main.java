@@ -73,6 +73,9 @@ public class Main extends JavaPlugin {
 
         accuracy = (float) plugin.getConfig().getDouble("accuracy");
 
+        if (accuracy < 0.05f)
+            accuracy = 0.05f;
+
         Bukkit.getServer().getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "DuelWielding v" + ChatColor.WHITE + plugin.getDescription().getVersion() + ChatColor.GREEN + " is now enabled!");
 
     }
