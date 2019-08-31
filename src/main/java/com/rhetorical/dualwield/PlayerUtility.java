@@ -1,5 +1,6 @@
 package com.rhetorical.dualwield;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -92,31 +93,33 @@ class PlayerUtility {
 
 //		short durability = stack.getItemMeta();
 
-		ItemMeta meta = stack.getItemMeta();
+		if (attacker.getGameMode() != GameMode.CREATIVE) {
 
-		short durability = (short) ((Damageable) meta).getDamage();
+			ItemMeta meta = stack.getItemMeta();
+
+			short durability = (short) ((Damageable) meta).getDamage();
 
 
-		if (enchantments.containsKey(Enchantment.DURABILITY)) {
-			double rand = Math.random() * 100;
+			if (enchantments.containsKey(Enchantment.DURABILITY)) {
+				double rand = Math.random() * 100;
 
-			if ((100 / enchantments.get(Enchantment.DURABILITY) + 1) > rand) {
+				if ((100 / enchantments.get(Enchantment.DURABILITY) + 1) > rand) {
+					durability = (short) (durability + (short) 1);
+				}
+			} else {
 				durability = (short) (durability + (short) 1);
 			}
-		} else {
-			durability = (short) (durability + (short) 1);
+
+			((Damageable) meta).setDamage((int) durability);
+
+			if (durability >= stack.getType().getMaxDurability()) {
+				attacker.getInventory().setItemInOffHand(new ItemStack(Material.AIR)); //todo: switch to null if error persists
+				//attacker.getInventory().setItemInOffHand(null);
+				attacker.playSound(attacker.getEyeLocation(), Sound.ENTITY_ITEM_BREAK, 1f, 1f);
+			} else {
+				stack.setItemMeta(meta);
+			}
 		}
-
-		((Damageable) meta).setDamage((int) durability);
-
-		if (durability >= stack.getType().getMaxDurability()) {
-			attacker.getInventory().setItemInOffHand(new ItemStack(Material.AIR)); //todo: switch to null if error persists
-			//attacker.getInventory().setItemInOffHand(null);
-			attacker.playSound(attacker.getEyeLocation(), Sound.ENTITY_ITEM_BREAK, 1f, 1f);
-		} else {
-			stack.setItemMeta(meta);
-		}
-
 
 		/* End enchantment management */
 
