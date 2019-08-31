@@ -2,9 +2,6 @@ package com.rhetorical.dualwield.raytracing;
 
 /* Credit goes to CJP10 on the Spigot forums for the original code I built off of. */
 
-
-import org.bukkit.Effect;
-import org.bukkit.World;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
@@ -12,8 +9,6 @@ import java.util.ArrayList;
 
 public class RayTrace {
 
-	//origin = start position
-	//direction = direction in which the raytrace will go
 	private Vector origin, direction;
 
 	public RayTrace(Vector origin, Vector direction) {
@@ -21,55 +16,23 @@ public class RayTrace {
 		this.direction = direction;
 	}
 
-	//get a point on the raytrace at X blocks away
-	public Vector getPostion(double blocksAway) {
-		return origin.clone().add(direction.clone().multiply(blocksAway));
+	//Gets a point on the ray with the given distance.
+	private Vector getPostion(double distance) {
+		return origin.clone().add(direction.clone().multiply(distance));
 	}
 
-	//checks if a position is on contained within the position
-	public boolean isOnLine(Vector position) {
-		double t = (position.getX() - origin.getX()) / direction.getX();
-		;
-		if (position.getBlockY() == origin.getY() + (t * direction.getY()) && position.getBlockZ() == origin.getZ() + (t * direction.getZ())) {
-			return true;
-		}
-		return false;
-	}
-
-	//get all postions on a raytrace
-	public ArrayList<Vector> traverse(double blocksAway, double accuracy) {
+	//Traverse the positions along the ray's path
+	private ArrayList<Vector> traverse(double distance, double accuracy) {
 		ArrayList<Vector> positions = new ArrayList<>();
-		for (double d = 0; d <= blocksAway; d += accuracy) {
+		for (double d = 0; d <= distance; d += accuracy) {
 			positions.add(getPostion(d));
 		}
 		return positions;
 	}
 
-	//intersection detection for current raytrace with return
-	public Vector positionOfIntersection(Vector min, Vector max, double blocksAway, double accuracy) {
-		ArrayList<Vector> positions = traverse(blocksAway, accuracy);
-		for (Vector position : positions) {
-			if (intersects(position, min, max)) {
-				return position;
-			}
-		}
-		return null;
-	}
-
-	//bounding box instead of vector
-	public Vector positionOfIntersection(BoundingBox boundingBox, double blocksAway, double accuracy) {
-		ArrayList<Vector> positions = traverse(blocksAway, accuracy);
-		for (Vector position : positions) {
-			if (intersects(position, boundingBox.getMin(), boundingBox.getMax())) {
-				return position;
-			}
-		}
-		return null;
-	}
-
-	//bounding box instead of vector
-	public boolean intersects(BoundingBox boundingBox, double blocksAway, double accuracy) {
-		ArrayList<Vector> positions = traverse(blocksAway, accuracy);
+	//Checks for an intersection within the bounding box with the given distance and accuracy
+	public boolean intersects(BoundingBox boundingBox, double distance, double accuracy) {
+		ArrayList<Vector> positions = traverse(distance, accuracy);
 		for (Vector position : positions) {
 			if (intersects(position, boundingBox.getMin(), boundingBox.getMax())) {
 				return true;
@@ -78,8 +41,9 @@ public class RayTrace {
 		return false;
 	}
 
-	//general intersection detection
-	public static boolean intersects(Vector position, Vector min, Vector max) {
+
+	//Checks for intersection within bounds
+	private static boolean intersects(Vector position, Vector min, Vector max) {
 		if (position.getX() < min.getX() || position.getX() > max.getX()) {
 			return false;
 		} else if (position.getY() < min.getY() || position.getY() > max.getY()) {
@@ -88,13 +52,6 @@ public class RayTrace {
 			return false;
 		}
 		return true;
-	}
-
-	//debug / effects
-	public void highlight(World world, double blocksAway, double accuracy){
-		for(Vector position : traverse(blocksAway,accuracy)){
-			world.playEffect(position.toLocation(world), Effect.EXTINGUISH,0);
-		}
 	}
 
 }

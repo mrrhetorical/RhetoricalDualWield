@@ -1,7 +1,8 @@
 #Should the plugin require players have permissions to swing the offhand items?
 require_permission: false
-#Accuracy: Lower numbers will result in more accurate striking of entities, but with more than a few players, it may increase server lag. 0.5 is pretty comfortable.
-accuraccy: 0.5
+#Accuracy: Lower numbers will result in more accurate striking of entities, but with more than a few players, it may increase server lag.
+#0.5 and below is very accurate, but 1 is a bit quicker, and accuracy is still good. Numbers greater than 1 are not recommended.
+accuraccy: 0.6
 #A list of allowed materials to be swung in the offhand.
 offhand_materials:
   - 'DIAMOND_SWORD'
@@ -15,6 +16,7 @@ offhand_materials:
   - 'STONE_AXE'
   - 'WOODEN_AXE'
 #A list of materials that will prevent the offhand from swinging when present in the main hand.
+#Bows, crossbows, shields, potions, and blocks (when placing only) will always prevent the offhand from swinging.
 disallowed_materials:
   - 'COOKED_PORKCHOP'
   - 'COOKED_BEEF'

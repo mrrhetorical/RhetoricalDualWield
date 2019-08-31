@@ -107,7 +107,8 @@ class DualWieldManager implements Listener {
 					|| mainhand == Material.SPLASH_POTION
 					|| mainhand == Material.SHIELD
 					|| mainhand == Material.BOW
-					|| mainhand == Material.CROSSBOW)) {
+					|| mainhand == Material.CROSSBOW
+					|| PlayerUtility.isFood(mainhand))) {
 				return;
 			}
 
