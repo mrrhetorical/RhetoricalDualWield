@@ -1,5 +1,6 @@
 package com.rhetorical.dualwield;
 
+import com.rhetorical.dualwield.hitbox.HitboxUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -60,6 +61,8 @@ public class Main extends JavaPlugin {
         } else {
             Bukkit.getConsoleSender().sendMessage(prefix + "Spigot version < 1.12 detected!");
         }
+
+        HitboxUtility.getInstance();
 
 
         List<String> materialNames = plugin.getConfig().getStringList("offhand_materials");

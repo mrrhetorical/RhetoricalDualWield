@@ -1,5 +1,6 @@
 package com.rhetorical.dualwield.hitbox;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
 
@@ -74,7 +75,7 @@ public class HitboxUtility {
 		hitboxes.put(Creeper.class, new Hitbox(Creeper.class, 0.6f, 1.7f));
 		hitboxes.put(Blaze.class, new Hitbox(Blaze.class, 0.6f, 1.8f));
 		hitboxes.put(Zombie.class, new Hitbox(Zombie.class, 0.6f, 1.9f));
-		babyHitboxes.put(PigZombie.class, new Hitbox(PigZombie.class, 0.3f, 0.9f));
+		hitboxes.put(PigZombie.class, new Hitbox(PigZombie.class, 0.3f, 0.9f));
 		hitboxes.put(Evoker.class, new Hitbox(Evoker.class, 0.6f, 1.9f));
 		hitboxes.put(Villager.class, new Hitbox(Villager.class, 0.6f, 1.9f));
 		hitboxes.put(Husk.class, new Hitbox(Husk.class, 0.6f, 1.9f));
@@ -94,13 +95,93 @@ public class HitboxUtility {
 
 		/* Large Hitboxes */
 
-		babyHitboxes.put(Slime.class, new Hitbox(Slime.class, 2f, 2f));
-		babyHitboxes.put(MagmaCube.class, new Hitbox(MagmaCube.class, 2f, 2f));
+		largeHitboxes.put(Slime.class, new Hitbox(Slime.class, 2f, 2f));
+		largeHitboxes.put(MagmaCube.class, new Hitbox(MagmaCube.class, 2f, 2f));
+
+		Bukkit.getLogger().info("Setup hitboxes!");
+	}
+
+	private Hitbox getHitbox(LivingEntity entity) {
+
+		Class<? extends Entity> type = entity.getType().getEntityClass();
+
+		if (type == null)
+			return null;
+
+		boolean isAgeable = Ageable.class.isAssignableFrom(type);
+
+		if (type.equals(Slime.class) || type.equals(MagmaCube.class)) {
+			Slime slime = (Slime) entity;
+
+			Hitbox box = null;
+
+			switch(slime.getSize()) {
+				case 1:
+					box = babyHitboxes.get(type);
+					break;
+				case 2:
+					box = hitboxes.get(type);
+					break;
+				case 3:
+					box = largeHitboxes.get(type);
+					break;
+				default:
+					Bukkit.getLogger().warning("Could not get slime or magma cube size of " + slime.getSize());
+					break;
+			}
+
+			return box;
+		} else if (isAgeable) {
+			Ageable ageable = (Ageable) entity;
+			Hitbox box = null;
+
+			if (ageable.isAdult())
+				box = hitboxes.get(type);
+			else
+				box = babyHitboxes.get(type);
+
+			return box;
+		} if (type.equals(Zombie.class)) {
+			Zombie z = (Zombie) entity;
+
+			Hitbox box = null;
+
+			if (z.isBaby())
+				box = babyHitboxes.get(type);
+			else
+				box = hitboxes.get(type);
+
+			return box;
+		}
+
+		return null;
 	}
 
 	public static boolean withinBounds(LivingEntity entity, Location loc) {
 
+		Hitbox hitbox = getInstance().getHitbox(entity);
+		if (hitbox == null) {
+			Bukkit.getLogger().warning(String.format("Could not get hitbox for entity with type %s", entity.getClass().getName()));
+			return false;
+		}
 
+		float locX = (float) loc.getX();
+		float locY = (float) loc.getY();
+		float locZ = (float) loc.getZ();
+
+		float entX = (float) entity.getLocation().getX();
+		float entY = (float) entity.getLocation().getY();
+		float entZ = (float) entity.getLocation().getZ();
+
+		float width = hitbox.getWidth() * 1.05f;
+		float height = hitbox.getHeight() * 1.05f;
+
+		// x side to side, z is front to back, y is top to bottom (- and + represent the total length, width, or heigh when added together)
+		if(((locX - width < entX) && (entX < locX + width))
+				&& ((locY - height < entY) && (entY < locY + height))
+				&& ((locZ - width < entZ) && (entZ < locZ + width))) {
+			return true;
+		}
 
 		return false;
 	}

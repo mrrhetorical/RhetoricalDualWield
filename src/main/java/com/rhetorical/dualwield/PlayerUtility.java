@@ -1,5 +1,6 @@
 package com.rhetorical.dualwield;
 
+import com.rhetorical.dualwield.hitbox.HitboxUtility;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -160,18 +161,8 @@ class PlayerUtility {
 			LivingEntity entity = (LivingEntity) e;
 
 			for(Location loc : locations) {
-				float locX = (float) loc.getX();
-				float locY = (float) loc.getY();
-				float locZ = (float) loc.getZ();
-
-				float entX = (float) entity.getLocation().getX();
-				float entY = (float) entity.getLocation().getY();
-				float entZ = (float) entity.getLocation().getZ();
-
-				// x side to side, z is front to back, y is top to bottom (- and + represent the total length, width, or heigh when added together)
-				if(((locX-1.2f < entX)&&(entX < locX+1.2f))&&((locY-1.6f < entY)&&(entY < locY+1.6f))&&((locZ-1.2f < entZ)&&(entZ < locZ+1.2f))) {
+				if (HitboxUtility.withinBounds(entity, loc))
 					return entity;
-				}
 			}
 		}
 		return null;
