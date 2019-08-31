@@ -41,21 +41,17 @@ public class Main extends JavaPlugin {
         } catch(DualWieldManagerAlreadyExistsException e) {
             e.printStackTrace();
         }
-        if (Bukkit.getServer().getBukkitVersion().startsWith("1.13")) {
-            postWaterUpdate = true;
-        } else {
-            for (int i = 14; i < 100; i++) {
-                if (Bukkit.getServer().getBukkitVersion().startsWith("1." + i)) {
-                    postWaterUpdate = true;
-                    break;
-                }
 
-                if (Bukkit.getServer().getBukkitVersion().startsWith("2")) {
-                    postWaterUpdate = true;
-                    break;
-                }
+        for (int i = 13; i < 100; i++) {
+            if (Bukkit.getServer().getBukkitVersion().startsWith("1." + i)) {
+                postWaterUpdate = true;
+                break;
+            }else  if (Bukkit.getServer().getBukkitVersion().startsWith("2")) {
+                postWaterUpdate = true;
+                break;
             }
         }
+
 
         if (postWaterUpdate) {
             Bukkit.getConsoleSender().sendMessage(prefix + "Spigot version 1.13+ detected!");
