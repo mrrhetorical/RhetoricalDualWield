@@ -1,6 +1,10 @@
 #Should the plugin require players have permissions to swing the offhand items?
+#Permission: 'rdw.use.[material_name]' for specific material, or 'rdw.use.*' for any material.
 require_permission: false
-#A list of allowed materials to be swung in the offhand.
+#Accuracy: Lower numbers will result in more accurate striking of entities, but with more than a few players, it may increase server lag.
+#0.5 and below is very accurate, but 1 is a bit quicker, and accuracy is still good. Numbers greater than 1 are not recommended.
+accuraccy: 0.6
+#A list of allowed materials to be swung in the offhand. Add the material's name here for it to be swing-able in the offhand.
 offhand_materials:
   - 'DIAMOND_SWORD'
   - 'GOLDEN_SWORD'
@@ -13,6 +17,5 @@ offhand_materials:
   - 'STONE_AXE'
   - 'WOODEN_AXE'
 #A list of materials that will prevent the offhand from swinging when present in the main hand.
-disallowed_materials:
-  - 'COOKED_PORKCHOP'
-  - 'COOKED_BEEF'
+#Bows, crossbows, shields, potions, food, and blocks (when placing only) will always prevent the offhand from swinging.
+disallowed_materials: []

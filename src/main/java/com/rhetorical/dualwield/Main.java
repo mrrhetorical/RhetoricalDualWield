@@ -22,6 +22,8 @@ public class Main extends JavaPlugin {
 
     static boolean postWaterUpdate = false;
 
+    static float accuracy = 0.05f;
+
     private String prefix = ChatColor.WHITE + "[" + ChatColor.YELLOW + "DW" + ChatColor.WHITE + "]" + ChatColor.RESET + " ";
 
     @Override
@@ -39,28 +41,23 @@ public class Main extends JavaPlugin {
         } catch(DualWieldManagerAlreadyExistsException e) {
             e.printStackTrace();
         }
-        if (Bukkit.getServer().getBukkitVersion().startsWith("1.13")) {
-            postWaterUpdate = true;
-        } else {
-            for (int i = 14; i < 100; i++) {
-                if (Bukkit.getServer().getBukkitVersion().startsWith("1." + i)) {
-                    postWaterUpdate = true;
-                    break;
-                }
 
-                if (Bukkit.getServer().getBukkitVersion().startsWith("2")) {
-                    postWaterUpdate = true;
-                    break;
-                }
+        for (int i = 13; i < 100; i++) {
+            if (Bukkit.getServer().getBukkitVersion().startsWith("1." + i)) {
+                postWaterUpdate = true;
+                break;
+            }else  if (Bukkit.getServer().getBukkitVersion().startsWith("2")) {
+                postWaterUpdate = true;
+                break;
             }
         }
+
 
         if (postWaterUpdate) {
             Bukkit.getConsoleSender().sendMessage(prefix + "Spigot version 1.13+ detected!");
         } else {
             Bukkit.getConsoleSender().sendMessage(prefix + "Spigot version < 1.12 detected!");
         }
-
 
         List<String> materialNames = plugin.getConfig().getStringList("offhand_materials");
         allowedMaterials = getMaterials(materialNames);
@@ -69,6 +66,11 @@ public class Main extends JavaPlugin {
         disallowedMaterials = getMaterials(disallowedMaterialNames);
 
         requirePermission = plugin.getConfig().getBoolean("require_permission");
+
+        accuracy = (float) plugin.getConfig().getDouble("accuracy");
+
+        if (accuracy < 0.05f)
+            accuracy = 0.05f;
 
         Bukkit.getServer().getConsoleSender().sendMessage(prefix + ChatColor.GREEN + "DuelWielding v" + ChatColor.WHITE + plugin.getDescription().getVersion() + ChatColor.GREEN + " is now enabled!");
 

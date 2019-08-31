@@ -1,6 +1,7 @@
 package com.rhetorical.dualwield;
 
-import org.bukkit.Location;
+import com.rhetorical.dualwield.raytracing.RayTrace;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
@@ -10,9 +11,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 class PlayerUtility {
 
@@ -92,30 +94,33 @@ class PlayerUtility {
 
 //		short durability = stack.getItemMeta();
 
-		ItemMeta meta = stack.getItemMeta();
+		if (attacker.getGameMode() != GameMode.CREATIVE) {
 
-		short durability = (short) ((Damageable) meta).getDamage();
+			ItemMeta meta = stack.getItemMeta();
+
+			short durability = (short) ((Damageable) meta).getDamage();
 
 
-		if (enchantments.containsKey(Enchantment.DURABILITY)) {
-			double rand = Math.random() * 100;
+			if (enchantments.containsKey(Enchantment.DURABILITY)) {
+				double rand = Math.random() * 100;
 
-			if ((100 / enchantments.get(Enchantment.DURABILITY) + 1) > rand) {
+				if ((100 / enchantments.get(Enchantment.DURABILITY) + 1) > rand) {
+					durability = (short) (durability + (short) 1);
+				}
+			} else {
 				durability = (short) (durability + (short) 1);
 			}
-		} else {
-			durability = (short) (durability + (short) 1);
+
+			((Damageable) meta).setDamage((int) durability);
+
+			if (durability >= stack.getType().getMaxDurability()) {
+				attacker.getInventory().setItemInOffHand(new ItemStack(Material.AIR)); //todo: switch to null if error persists
+				//attacker.getInventory().setItemInOffHand(null);
+				attacker.playSound(attacker.getEyeLocation(), Sound.ENTITY_ITEM_BREAK, 1f, 1f);
+			} else {
+				stack.setItemMeta(meta);
+			}
 		}
-
-		((Damageable) meta).setDamage((int) durability);
-
-		if (durability >= stack.getType().getMaxDurability()) {
-			attacker.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
-			attacker.playSound(attacker.getEyeLocation(), Sound.ENTITY_ITEM_BREAK, 1f, 1f);
-		} else {
-			stack.setItemMeta(meta);
-		}
-
 
 		/* End enchantment management */
 
@@ -141,35 +146,69 @@ class PlayerUtility {
 	 * @return Any LivingEntity that the player is looking at, or null if nothing.
 	 * */
 	static LivingEntity getTargetEntity(Player player, int distance) {
+
 		Collection<Entity> entities = player.getNearbyEntities(distance, 10, 30);
-		ArrayList<Location> locations = new ArrayList<>();
 
-		for (int i = distance; i >= 1; i--) {
-			locations.add(player.getTargetBlock(null, i).getLocation());
-		}
+		RayTrace rayTrace = new RayTrace(player.getEyeLocation().toVector(), player.getEyeLocation().getDirection().normalize());
 
-		for(Entity e : entities) {
-
+		for (Entity e : entities) {
 			if (!(e instanceof LivingEntity))
 				continue;
 
 			LivingEntity entity = (LivingEntity) e;
 
-			for(Location loc : locations) {
-				float locX = (float) loc.getX();
-				float locY = (float) loc.getY();
-				float locZ = (float) loc.getZ();
-
-				float entX = (float) entity.getLocation().getX();
-				float entY = (float) entity.getLocation().getY();
-				float entZ = (float) entity.getLocation().getZ();
-
-				// x side to side, z is front to back, y is top to bottom (- and + represent the total length, width, or heigh when added together)
-				if(((locX-1.2f < entX)&&(entX < locX+1.2f))&&((locY-1.6f < entY)&&(entY < locY+1.6f))&&((locZ-1.2f < entZ)&&(entZ < locZ+1.2f))) {
-					return entity;
-				}
+			if (rayTrace.intersects(entity.getBoundingBox(), distance, Main.accuracy)) {
+				return entity;
 			}
 		}
+
 		return null;
+	}
+
+	static boolean isFood(Material material) {
+
+		Set<Material> foodstuff = new HashSet<>();
+
+		foodstuff.add(Material.GOLDEN_CARROT);
+		foodstuff.add(Material.GOLDEN_APPLE);
+		foodstuff.add(Material.ENCHANTED_GOLDEN_APPLE);
+		foodstuff.add(Material.COOKED_PORKCHOP);
+		foodstuff.add(Material.COOKED_BEEF);
+		foodstuff.add(Material.COOKED_MUTTON);
+		foodstuff.add(Material.COOKED_SALMON);
+		foodstuff.add(Material.SPIDER_EYE);
+		foodstuff.add(Material.COOKED_CHICKEN);
+		foodstuff.add(Material.COOKED_RABBIT);
+		foodstuff.add(Material.RABBIT_STEW);
+		foodstuff.add(Material.MUSHROOM_STEM);
+		foodstuff.add(Material.BREAD);
+		foodstuff.add(Material.COOKED_COD);
+		foodstuff.add(Material.BAKED_POTATO);
+		foodstuff.add(Material.BEETROOT_SOUP);
+		foodstuff.add(Material.SUSPICIOUS_STEW);
+		foodstuff.add(Material.CARROT);
+		foodstuff.add(Material.BEETROOT);
+		foodstuff.add(Material.DRIED_KELP);
+		foodstuff.add(Material.APPLE);
+		foodstuff.add(Material.BEEF);
+		foodstuff.add(Material.PORKCHOP);
+		foodstuff.add(Material.MUTTON);
+		foodstuff.add(Material.CHICKEN);
+		foodstuff.add(Material.RABBIT);
+		foodstuff.add(Material.POISONOUS_POTATO);
+		foodstuff.add(Material.MELON_SLICE);
+		foodstuff.add(Material.POTATO);
+		foodstuff.add(Material.PUMPKIN_PIE);
+		foodstuff.add(Material.CHORUS_FRUIT);
+		foodstuff.add(Material.COOKIE);
+		foodstuff.add(Material.CAKE);
+		foodstuff.add(Material.ROTTEN_FLESH);
+		foodstuff.add(Material.COD);
+		foodstuff.add(Material.TROPICAL_FISH);
+		foodstuff.add(Material.PUFFERFISH);
+		foodstuff.add(Material.SALMON);
+		foodstuff.add(Material.SWEET_BERRIES);
+
+		return foodstuff.contains(material);
 	}
 }
