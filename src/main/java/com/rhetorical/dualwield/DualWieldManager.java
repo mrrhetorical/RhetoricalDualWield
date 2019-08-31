@@ -15,7 +15,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BlockDataMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,8 +95,7 @@ class DualWieldManager implements Listener {
 
 		if (!Main.disallowedMaterials.contains(e.getPlayer().getInventory().getItemInMainHand().getType())) {
 			if (e.getAction() == Action.RIGHT_CLICK_BLOCK
-					&& e.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null
-					&& e.getPlayer().getInventory().getItemInMainHand().getItemMeta() instanceof BlockDataMeta)
+					&& e.getPlayer().getInventory().getItemInMainHand().getType().isBlock())
 				return;
 
 			Material mainhand = e.getPlayer().getInventory().getItemInMainHand().getType();
@@ -107,9 +105,19 @@ class DualWieldManager implements Listener {
 					|| mainhand == Material.SPLASH_POTION
 					|| mainhand == Material.SHIELD
 					|| mainhand == Material.BOW
-					|| mainhand == Material.CROSSBOW
-					|| PlayerUtility.isFood(mainhand))) {
+					|| mainhand.isEdible())) {
+
 				return;
+			} else if (e.getAction() == Action.RIGHT_CLICK_AIR) {
+				Material mat = null;
+
+				try {
+					mat = Material.valueOf("CROSSBOW");
+				} catch(Error|Exception ignored) {}
+
+				if (mat != null)
+					if (mainhand == mat)
+						return;
 			}
 
 			performSwing(e.getPlayer());
