@@ -12,9 +12,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 class PlayerUtility {
 
@@ -92,35 +90,8 @@ class PlayerUtility {
 
 		}
 
-//		short durability = stack.getItemMeta();
-
-		if (attacker.getGameMode() != GameMode.CREATIVE) {
-
-			ItemMeta meta = stack.getItemMeta();
-
-			short durability = (short) ((Damageable) meta).getDamage();
-
-
-			if (enchantments.containsKey(Enchantment.DURABILITY)) {
-				double rand = Math.random() * 100;
-
-				if ((100 / enchantments.get(Enchantment.DURABILITY) + 1) > rand) {
-					durability = (short) (durability + (short) 1);
-				}
-			} else {
-				durability = (short) (durability + (short) 1);
-			}
-
-			((Damageable) meta).setDamage((int) durability);
-
-			if (durability >= stack.getType().getMaxDurability()) {
-				attacker.getInventory().setItemInOffHand(new ItemStack(Material.AIR)); //todo: switch to null if error persists
-				//attacker.getInventory().setItemInOffHand(null);
-				attacker.playSound(attacker.getEyeLocation(), Sound.ENTITY_ITEM_BREAK, 1f, 1f);
-			} else {
-				stack.setItemMeta(meta);
-			}
-		}
+		if (attacker.getGameMode() == GameMode.SURVIVAL || attacker.getGameMode() == GameMode.ADVENTURE)
+			applyDurability(attacker, stack, enchantments);
 
 		/* End enchantment management */
 
@@ -136,6 +107,42 @@ class PlayerUtility {
 		}
 
 		return baseDamage * (1 - Math.min(20, Math.max((float) PlayerUtility.getArmorPoints(p) / 5, PlayerUtility.getArmorPoints(p) - baseDamage / (float) (PlayerUtility.getArmorToughness(p) / 4 + 2))) / 25);
+	}
+
+private static void applyDurability(Player attacker, ItemStack stack, Map<Enchantment, Integer> enchantments) {
+		ItemMeta meta = stack.getItemMeta();
+
+		short durability = 0;
+		try {
+			durability = (short) ((Damageable) meta).getDamage();
+		} catch (NullPointerException e) {
+			if (Main.isDebug()) {
+				e.printStackTrace();
+			}
+
+			return;
+		}
+
+
+		if (enchantments.containsKey(Enchantment.DURABILITY)) {
+			double rand = Math.random() * 100;
+
+			if ((100 / enchantments.get(Enchantment.DURABILITY) + 1) > rand) {
+				durability = (short) (durability + (short) 1);
+			}
+		} else {
+			durability = (short) (durability + (short) 1);
+		}
+
+		((Damageable) meta).setDamage((int) durability);
+
+		if (durability >= stack.getType().getMaxDurability()) {
+			attacker.getInventory().setItemInOffHand(new ItemStack(Material.AIR)); //todo: switch to null if error persists
+			//attacker.getInventory().setItemInOffHand(null);
+			attacker.playSound(attacker.getEyeLocation(), Sound.ENTITY_ITEM_BREAK, 1f, 1f);
+		} else {
+			stack.setItemMeta(meta);
+		}
 	}
 
 	/**

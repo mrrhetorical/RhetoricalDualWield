@@ -66,7 +66,7 @@ class DualWieldManager implements Listener {
         ItemStack heldItem = from.getInventory().getItemInOffHand();
 
         if (Main.requirePermission) {
-            if (!from.hasPermission("rdw.use." + heldItem.getType().toString().toUpperCase()) && !from.isOp() && !from.hasPermission("rdw.use.*"))
+            if (!from.hasPermission("rdw.use." + heldItem.getType().toString().toLowerCase()) && !from.isOp() && !from.hasPermission("rdw.use.*"))
                 return false;
         }
 

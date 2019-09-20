@@ -24,6 +24,9 @@ public class Main extends JavaPlugin {
 
     static float accuracy = 0.05f;
 
+    //Effectively final
+    private static boolean debug = false;
+
     private String prefix = ChatColor.WHITE + "[" + ChatColor.YELLOW + "DW" + ChatColor.WHITE + "]" + ChatColor.RESET + " ";
 
     @Override
@@ -68,6 +71,8 @@ public class Main extends JavaPlugin {
         requirePermission = plugin.getConfig().getBoolean("require_permission");
 
         accuracy = (float) plugin.getConfig().getDouble("accuracy");
+
+        debug = plugin.getConfig().getBoolean("debug");
 
         if (accuracy < 0.05f)
             accuracy = 0.05f;
@@ -130,6 +135,10 @@ public class Main extends JavaPlugin {
         }
 
         return mats;
+    }
+
+    static boolean isDebug() {
+        return debug;
     }
 
 }
