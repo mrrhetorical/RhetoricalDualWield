@@ -6,4 +6,4 @@ Access the Javadocs Here:
 https://mrrhetorical.github.io/RhetoricalDualWield/
 
 Access Jenkins Build here:
-http://73.48.141.248:8181/job/RhetoricalDualWield/
+http://73.48.141.248:8080/job/RhetoricalDualWield/
